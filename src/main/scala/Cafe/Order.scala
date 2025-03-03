@@ -1,5 +1,6 @@
 package Cafe
 
-object Order {
+object Order extends App {
+
 
 }
