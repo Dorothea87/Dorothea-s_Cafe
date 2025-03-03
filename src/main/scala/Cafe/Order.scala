@@ -1,6 +1,6 @@
 package Cafe
 
-object Order extends App {
-
+case class Order(items: List[Menu]) {
+def orderTotal: Double = items.map(_.price).sum
 
 }
