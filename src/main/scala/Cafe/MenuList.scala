@@ -12,7 +12,7 @@ object MenuList {
   val painsuisse = MenuItem("Pain au suisse", 5.75)
   val dreamcake = MenuItem("Dorothea's Dream cake", 4.75)
 
-  val standardMenu: List[MenuItem] = List(
+  var standardMenu: List[MenuItem] = List(
     flatwhite,
     matchalatte,
     dorotea,
@@ -37,6 +37,8 @@ object MenuList {
   }
 
   def allItems: List[MenuItem] = {
-    standardMenu ++ premiumItems.map(item => MenuItem(item.name, item.price))
+    standardMenu = standardMenu ++ premiumItems.map(item => MenuItem(item.name, item.price))
+    standardMenu
   }
 }
+
