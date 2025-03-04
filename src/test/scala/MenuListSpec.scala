@@ -2,6 +2,7 @@ import Cafe.{MenuItem, MenuList, PremiumItem}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
+
 class MenuListSpec extends AnyWordSpec with Matchers {
 
 
