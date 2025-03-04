@@ -3,6 +3,8 @@ import Cafe.{MenuList, Order}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
+//haven't tested the createOrder Method yet
+
 class CafeLogicSpec extends AnyWordSpec with Matchers {
 
   "createABill" should {
