@@ -20,6 +20,10 @@ object CafeLogic extends App {
   val asparagus = MenuList.addPremiumItem(PremiumItem("Asparagus Eggs Benedict", 15.00))
   MenuList.allItems.foreach(item => println(s"${item.name}: £${item.price}"))
 
+  val order3 = Order(List(MenuList.standardMenu(2), MenuList.standardMenu(10)))
+
+  println(order3)
+
 
 //  val selectedItems = Order(List(MenuItem(0), MenuItem(5)))
 //
