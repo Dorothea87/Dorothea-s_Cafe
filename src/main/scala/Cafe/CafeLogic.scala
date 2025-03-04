@@ -15,20 +15,21 @@ object CafeLogic extends App {
 
   //  println(createABill(order1.items, order1.orderTotal))
   println(createABill(order2.items, order2.orderTotal))
+  println(createABill(order1.items, order1.orderTotal))
 
   val asparagus = MenuList.addPremiumItem(PremiumItem("Asparagus Eggs Benedict", 15.00))
   MenuList.allItems.foreach(item => println(s"${item.name}: £${item.price}"))
 
 
-
-  //  def createOrder(selectedItems: List[MenuItem]): Order = {
-  //    Order(selectedItems)
-  //  }
-  //
-  //  val selectedItems = List(standardMenu(0), standardMenu(5))
-  //  val newOrder = createOrder(selectedItems)
-  //
-  //  println(s"The Order total is: ${newOrder.orderTotal}")
+//  val selectedItems = Order(List(MenuItem(0), MenuItem(5)))
+//
+//  def createOrder(selectedItems: List[MenuItem]): Order = {
+//    Order(selectedItems)
+//  }
+//
+//  val newOrder = createOrder(selectedItems)
+//
+//  println(s"The Order total is: ${newOrder.orderTotal}")
 
   //Method that tallies up my order and adds service charge
 
