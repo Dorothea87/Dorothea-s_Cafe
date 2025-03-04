@@ -8,6 +8,13 @@ object CafeLogic extends App {
   //  val total = order1.orderTotal
   //  println(s"Your total is: £$total")
 
+
+  def createOrder(selectedItems: List[MenuItem]): Order = {
+    Order(selectedItems)
+  }
+
+  def calculateServiceCharge(): Double = ???
+
   def createABill(items: List[MenuItem], total: Double): String = {
     val itemPerLine = items.map(item => s"${item.name}: £${item.price}").mkString("\n")
     s"Receipt:\n$itemPerLine\nTotal: £${total}"
@@ -17,27 +24,19 @@ object CafeLogic extends App {
   println(createABill(order2.items, order2.orderTotal))
   println(createABill(order1.items, order1.orderTotal))
 
-  val asparagus = MenuList.addPremiumItem(PremiumItem("Asparagus Eggs Benedict", 15.00))
+  val asparagus = MenuList.addPremiumItem(PremiumItem("Asparagus Eggs Benedict", 15.00, Prem))
   MenuList.allItems.foreach(item => println(s"${item.name}: £${item.price}"))
 
   val order3 = Order(List(MenuList.standardMenu(2), MenuList.standardMenu(10)))
 
   println(order3)
 
+  println(createOrder(List(MenuList.dorotea, MenuList.dreamcake)))
 
-//  val selectedItems = Order(List(MenuItem(0), MenuItem(5)))
-//
-//  def createOrder(selectedItems: List[MenuItem]): Order = {
-//    Order(selectedItems)
-//  }
-//
-//  val newOrder = createOrder(selectedItems)
-//
-//  println(s"The Order total is: ${newOrder.orderTotal}")
 
-  //Method that tallies up my order and adds service charge
-
+  //this is my to do list (sorry, I'm slow)
   /** SERVICE CHARGE */
+  //Method that tallies up my order and adds service charge
   //pattern matching ? only drink => no service charge, cold food => 10%, hot food => 20%, premium special => 25%, custom value =>
 
   /** STOCK COUNT */
