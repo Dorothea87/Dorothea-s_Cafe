@@ -1,5 +1,6 @@
 package Cafe
 
+
 object MenuList {
   val flatwhite = MenuItem("Flat white", 4.95, Drink)
   val matchalatte = MenuItem("Matcha latte", 6.95, Drink)

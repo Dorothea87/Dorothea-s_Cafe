@@ -35,9 +35,11 @@ object CafeLogic extends App {
 
 
   //this is my to do list (sorry, I'm slow)
+
   /** SERVICE CHARGE */
   //Method that tallies up my order and adds service charge
   //pattern matching ? only drink => no service charge, cold food => 10%, hot food => 20%, premium special => 25%, custom value =>
+  //this will eventually go into the calculateService charge
 
   /** STOCK COUNT */
   //create some conditional logic that represents when the stock count is 0, item can't be ordered anymore
