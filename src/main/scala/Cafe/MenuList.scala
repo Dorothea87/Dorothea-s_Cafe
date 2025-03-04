@@ -24,4 +24,19 @@ object MenuList {
     painsuisse,
     dreamcake
     )
+
+  private var premiumItems: List[PremiumItem] = List()
+
+  def addPremiumItem(item: PremiumItem): Option[PremiumItem] = {
+    if (premiumItems.exists(_.name == item.name)) {
+      None
+    } else {
+      premiumItems = premiumItems :+ item
+      Some(item)
+    }
+  }
+
+  def allItems: List[MenuItem] = {
+    standardMenu ++ premiumItems.map(item => MenuItem(item.name, item.price))
+  }
 }
