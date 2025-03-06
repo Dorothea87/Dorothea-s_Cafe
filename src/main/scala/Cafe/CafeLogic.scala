@@ -26,14 +26,14 @@ object CafeLogic extends App {
     } else if (order.items.exists(_.foodType == ColdFood)) {
       totalAmount * 0.10
     } else if (order.items.exists(_.foodType == Drink)) {
-      totalAmount
+      totalAmount * 0.0
     } else {
       0.0
     }
     customServiceCharge.getOrElse(serviceCharge)
   }
 
-  def createABill(order:Order, customServiceCharge: Option[Double] = None): String = {
+  def createABill(order: Order, customServiceCharge: Option[Double] = None): String = {
     val totalAmount = order.orderTotal
     val finalServiceCharge = calculateServiceCharge(order, customServiceCharge)
     val finalTotal = totalAmount + finalServiceCharge

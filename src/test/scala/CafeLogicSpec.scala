@@ -45,7 +45,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
         val order = Order(List(MenuItem("Expensive fancy salmon", 20.00, Premium)))
         val serviceCharge = calculateServiceCharge(order)
 
-        serviceCharge shouldEqual 5.00
+        serviceCharge shouldBe 5.00
       }
     }
 
@@ -54,7 +54,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
         val order = Order(List(MenuItem("Coffee", 2.00, Drink), MenuItem("Scrambled Eggs", 5.50, HotFood)))
         val serviceCharge = calculateServiceCharge(order)
 
-        serviceCharge shouldEqual 1.50
+        serviceCharge shouldBe 1.50
       }
     }
 
@@ -63,32 +63,50 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
         val order = Order(List(MenuItem("Coffee", 2.00, Drink), MenuItem("Sandwich", 5.50, ColdFood)))
         val serviceCharge = calculateServiceCharge(order)
 
-        serviceCharge shouldEqual 0.75
+        serviceCharge shouldBe 0.75
+      }
+    }
+
+    "return no service charge" when {
+      "no food type matches" in {
+        val order = Order(List(MenuItem("Coffee", 2.00, null), MenuItem("Chai Latte", 5.50, null)))
+        val serviceCharge = calculateServiceCharge(order)
+
+        serviceCharge shouldBe 0.0
+      }
+    }
+
+    "return no service charge" when {
+      "only drinks are in the order" in {
+        val order = Order(List(MenuItem("Coffee", 2.00, Drink), MenuItem("Chai Latte", 5.50, Drink)))
+        val serviceCharge = calculateServiceCharge(order)
+
+        serviceCharge shouldBe 0.0
+      }
+    }
+
+    "return a custom service charge" when {
+      "a custom service charge was set" in {
+        val order = Order(List(MenuItem("Coffee", 2.00, Drink), MenuItem("Sandwich", 6.00, ColdFood), MenuItem("Truffle Scrambled Eggs", 18.00, Premium)))
+        val serviceCharge = calculateServiceCharge(order, Some(15.00))
+
+        serviceCharge shouldBe 15.00
       }
     }
   }
-  //
-  //  "createABill" should {
-  //    "return a String with all the items in the order and the total" when {
-  //      "an order is put into the system" in {
-  //        val order1 = Order(List(MenuList.standardMenu(2), MenuList.standardMenu(7)))
-  //        val expectedResult = "Receipt:\nDoro-tea: £2.95\nCroissant: £4.95\nTotal: £7.9"
-  //        val result = createABill(order1.items, 7.9)
-  //
-  //        result shouldBe expectedResult
-  //
-  //      }
-  //    }
-  //
-  //    "return a string saying 'Total: £ 0.0'" when {
-  //      "an empty order is put into the system" in {
-  //        val orderEmpty = Order
-  //        val expectedResult = "Receipt:\n\nTotal: £0.0"
-  //        val result = createABill(orderEmpty.items, 0.0)
-  //
-  //        result shouldBe expectedResult
-  //
-  //      }
-  //    }
-  //  }
+
+  "createABill" should {
+    "return a String with all the items in the order and the total incl service charge" when {
+      "an order is put into the system" in {
+        val order1 = Order(List(MenuList.standardMenu(2), MenuList.standardMenu(7)))
+        val bill = createABill(order1)
+        val expectedResult = "Receipt:\nDoro-tea: £2.95\nCroissant: £4.95\nTotal: £8.69"
+
+        bill shouldBe expectedResult
+
+      }
+    }
+
+
+  }
 }

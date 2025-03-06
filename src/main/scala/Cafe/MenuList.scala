@@ -42,5 +42,10 @@ object MenuList {
     standardMenu = standardMenu ++ premiumItems.map(item => MenuItem(item.name, item.price, item.foodType))
     standardMenu
   }
+
+  def removeAnItem(item: PremiumItem): List[PremiumItem] = {
+    premiumItems = premiumItems.filterNot(_.name == item.name)
+    premiumItems
+  }
 }
 
