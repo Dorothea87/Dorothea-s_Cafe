@@ -1,47 +1,58 @@
 package Cafe
 
+import Cafe.MenuList.standardMenu
+
+import scala.math.BigDecimal.double2bigDecimal
+
 object CafeLogic extends App {
 
   val order1 = Order(List(MenuList.standardMenu(2), MenuList.standardMenu(7)))
   val order2 = Order(List(MenuList.standardMenu(2), MenuList.standardMenu(5), MenuList.standardMenu(9)))
 
-  //  val total = order1.orderTotal
-  //  println(s"Your total is: £$total")
-
-
-  def createOrder(selectedItems: List[MenuItem]): Order = {
-    Order(selectedItems)
-  }
-
-  def calculateServiceCharge(item: MenuItem): Double = {
-    item.foodType match {
-      case Premium => item.price * 0.25
-      case HotFood => item.price * 0.20
-      case ColdFood => item.price * 0.10
-      case Drink => item.price
+  def createOrder(selectedItems: List[MenuItem]): Either[String, Order] = {
+    selectedItems match {
+      case Nil => Left("No items selected")
+      case items if items.exists(item => !standardMenu.contains(item)) => Left("One of the selected items does not exist")
+      case items => Right(Order(selectedItems))
     }
   }
 
-  def createABill(items: List[MenuItem], total: Double): String = {
-    val itemPerLine = items.map(item => s"${item.name}: £${item.price}").mkString("\n")
-    s"Receipt:\n$itemPerLine\nTotal: £${total}"
+  def calculateServiceCharge(order: Order, customServiceCharge: Option[Double] = None): Double = {
+    val totalAmount = order.orderTotal
+    val serviceCharge = if (order.items.exists(_.foodType == Premium)) {
+      totalAmount * 0.25
+    } else if (order.items.exists(_.foodType == HotFood)) {
+      totalAmount * 0.20
+    } else if (order.items.exists(_.foodType == ColdFood)) {
+      totalAmount * 0.10
+    } else if (order.items.exists(_.foodType == Drink)) {
+      totalAmount
+    } else {
+      0.0
+    }
+    customServiceCharge.getOrElse(serviceCharge)
+  }
+
+  def createABill(order:Order, customServiceCharge: Option[Double] = None): String = {
+    val totalAmount = order.orderTotal
+    val finalServiceCharge = calculateServiceCharge(order, customServiceCharge)
+    val finalTotal = totalAmount + finalServiceCharge
+    val roundedTotal = BigDecimal(finalTotal).setScale(2, BigDecimal.RoundingMode.HALF_UP)
+    val itemPerLine = order.items.map(item => s"${item.name}: £${item.price}").mkString("\n")
+    s"Receipt:\n$itemPerLine\nTotal: £$roundedTotal"
   }
 
   //  println(createABill(order1.items, order1.orderTotal))
-  println(createABill(order2.items, order2.orderTotal))
-  println(createABill(order1.items, order1.orderTotal))
+  println(createABill(order2))
+  println(createABill(order1))
 
   val asparagus = MenuList.addPremiumItem(PremiumItem("Asparagus Eggs Benedict", 15.00, Premium))
   MenuList.allItems.foreach(item => println(s"${item.name}: £${item.price}"))
 
   val order3 = Order(List(MenuList.standardMenu(2), MenuList.standardMenu(10)))
 
-  println(order3)
+  println(order3.items)
 
-  println(createOrder(List(MenuList.dorotea, MenuList.dreamcake)))
-
-
-  //this is my to do list (sorry, I'm slow)
 
   /** SERVICE CHARGE */
   //Method that tallies up my order and adds service charge
