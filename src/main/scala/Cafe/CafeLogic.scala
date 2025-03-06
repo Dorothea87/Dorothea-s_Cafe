@@ -13,7 +13,14 @@ object CafeLogic extends App {
     Order(selectedItems)
   }
 
-  def calculateServiceCharge(): Double = ???
+  def calculateServiceCharge(item: MenuItem): Double = {
+    item.foodType match {
+      case Premium => item.price * 0.25
+      case HotFood => item.price * 0.20
+      case ColdFood => item.price * 0.10
+      case Drink => item.price
+    }
+  }
 
   def createABill(items: List[MenuItem], total: Double): String = {
     val itemPerLine = items.map(item => s"${item.name}: £${item.price}").mkString("\n")
@@ -24,7 +31,7 @@ object CafeLogic extends App {
   println(createABill(order2.items, order2.orderTotal))
   println(createABill(order1.items, order1.orderTotal))
 
-  val asparagus = MenuList.addPremiumItem(PremiumItem("Asparagus Eggs Benedict", 15.00, Prem))
+  val asparagus = MenuList.addPremiumItem(PremiumItem("Asparagus Eggs Benedict", 15.00, Premium))
   MenuList.allItems.foreach(item => println(s"${item.name}: £${item.price}"))
 
   val order3 = Order(List(MenuList.standardMenu(2), MenuList.standardMenu(10)))
@@ -35,9 +42,11 @@ object CafeLogic extends App {
 
 
   //this is my to do list (sorry, I'm slow)
+
   /** SERVICE CHARGE */
   //Method that tallies up my order and adds service charge
   //pattern matching ? only drink => no service charge, cold food => 10%, hot food => 20%, premium special => 25%, custom value =>
+  //this will eventually go into the calculateService charge
 
   /** STOCK COUNT */
   //create some conditional logic that represents when the stock count is 0, item can't be ordered anymore
