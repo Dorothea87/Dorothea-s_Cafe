@@ -1,6 +1,6 @@
 package Cafe
 
-case class MenuItem(name: String, price: Double, foodType: FoodType)
+case class MenuItem(name: String, price: Double, foodType: FoodType, stockCount: Int)
 
 sealed trait FoodType
 
