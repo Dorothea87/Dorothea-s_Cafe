@@ -63,4 +63,25 @@ class MenuListSpec extends AnyWordSpec with Matchers {
     }
   }
 
+//  "removeAnItem" should {
+//    "remove an item from a list" when {
+//      "the name of the item is entered" in {
+//        val item1 = PremiumItem("Truffle Pasta", 19.99, Premium, 20)
+//        val item2 = PremiumItem("Lobster Roll", 24.00, Premium, 15)
+//
+//        MenuList.addPremiumItem(item1)
+//        MenuList.addPremiumItem(item2)
+//
+//        val menu = MenuList.removeAnItem(item1)
+//
+//        val result = MenuList
+//
+//        // Validate that item1 is removed but item2 is still present
+//        result should not contain (MenuItem(item1.name, item1.price, item1.foodType, item1.stockCount))
+//        result should contain(MenuItem(item2.name, item2.price, item2.foodType, item2.stockCount))
+//        //        MenuList should have size 1
+//      }
+//    }
+//  }
+
 }
